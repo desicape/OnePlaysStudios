@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Players Playing</title>
+  <title>Players playing</title>
   <style>
     body {
       margin: 0;
@@ -16,13 +16,13 @@
     #count {
       font-size: 5rem;
       font-weight: bold;
-      color: #00ff88;
+      color: #fff;
       text-shadow: 0 0 10px #00ff88;
     }
   </style>
 </head>
 <body>
-  <h1>Players Playing our games:</h1>
+  <h1>Players playing our games:</h1>
   <div id="count">loading...</div>
 
   <script>
@@ -55,7 +55,7 @@
           });
         }
 
-        document.getElementById("count").textContent = total.toLocaleString() + " jugadores";
+        document.getElementById("count").textContent = total.toLocaleString() + " players";
       } catch (err) {
         document.getElementById("count").textContent = "10 players";
         console.error("Error fetching players:", err);

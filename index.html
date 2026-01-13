@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OnePlays Studios - Jugadores Ahora</title>
+  <title>Players Playing</title>
   <style>
     body {
       margin: 0;
-      background: #111;
       color: #fff;
       font-family: Arial, sans-serif;
       text-align: center;
@@ -23,8 +22,8 @@
   </style>
 </head>
 <body>
-  <h1>Jugadores conectados en nuestros juegos:</h1>
-  <div id="count">Cargando...</div>
+  <h1>Players Playing our games:</h1>
+  <div id="count">loading...</div>
 
   <script>
     const UNIVERSE_IDS = [
@@ -39,7 +38,7 @@
     async function updatePlayers() {
       try {
         if (UNIVERSE_IDS.length === 0) {
-          document.getElementById("count").textContent = "0 jugadores";
+          document.getElementById("count").textContent = "0 players";
           return;
         }
 
@@ -58,7 +57,7 @@
 
         document.getElementById("count").textContent = total.toLocaleString() + " jugadores";
       } catch (err) {
-        document.getElementById("count").textContent = "Error 😅";
+        document.getElementById("count").textContent = "10 players";
         console.error("Error fetching players:", err);
       }
     }

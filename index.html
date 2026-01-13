@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnePlays Studios - Jugadores Ahora</title>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 { font-size: 2.5rem; margin-bottom: 10px; }
+    #count {
+      font-size: 5rem;
+      font-weight: bold;
+      color: #00ff88;
+      text-shadow: 0 0 10px #00ff88;
+    }
+  </style>
+</head>
+<body>
+  <h1>Jugadores conectados en nuestros juegos:</h1>
+  <div id="count">Cargando...</div>
+
+  <script>
+    const UNIVERSE_IDS = [
+     8526147290,
+    9318680255,
+    6230948959,
+    4845397406,
+    ];
+
+    const proxy = "https://api.allorigins.win/raw?url=";
+
+    async function updatePlayers() {
+      try {
+        if (UNIVERSE_IDS.length === 0) {
+          document.getElementById("count").textContent = "0 jugadores";
+          return;
+        }
+
+        const idsString = UNIVERSE_IDS.join(',');
+        const url = `https://games.roblox.com/v1/games?universeIds=${idsString}`;
+        
+        const response = await fetch(proxy + encodeURIComponent(url));
+        const data = await response.json();
+
+        let total = 0;
+        if (data.data && Array.isArray(data.data)) {
+          data.data.forEach(game => {
+            total += game.playing || 0;
+          });
+        }
+
+        document.getElementById("count").textContent = total.toLocaleString() + " jugadores";
+      } catch (err) {
+        document.getElementById("count").textContent = "Error 😅";
+        console.error("Error fetching players:", err);
+      }
+    }
+
+    updatePlayers();
+    setInterval(updatePlayers, 15000); // Cada 15 segundos
+  </script>
+</body>
+</html>
